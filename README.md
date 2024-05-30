@@ -1,4 +1,4 @@
-# Duplicate Page and Replace
+# Duplicate SEO Wizard
 
 Duplicate Page and Replace is a WordPress plugin that allows users to duplicate a page and replace specified words in the duplicated page. This can be particularly useful for SEO optimization or when creating multiple similar pages with minor variations.
 
@@ -29,11 +29,3 @@ Once the plugin is activated, you can access it from the WordPress admin sidebar
 - Replace specified words or phrases in the duplicated pages.
 - Specify the number of duplicates to create.
 - Customizable and user-friendly interface.
-
-## Support and Feedback
-
-If you encounter any issues or have suggestions for improvements, please [open an issue](#) on GitHub. We welcome your feedback and contributions!
-
-## License
-
-This project is licensed under the [GNU General Public License v3.0](LICENSE). You are free to use, modify, and distribute this software in accordance with the terms of the license.
