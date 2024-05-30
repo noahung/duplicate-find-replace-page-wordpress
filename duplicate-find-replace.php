@@ -110,6 +110,9 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
         update_post_meta($new_page_id, '_yoast_wpseo_focuskw', $new_focus_keyphrase);
         update_post_meta($new_page_id, '_yoast_wpseo_title', $new_seo_title);
         update_post_meta($new_page_id, '_yoast_wpseo_metadesc', $new_meta_description);
+
+        // Update the meta options for the duplicated page
+        update_post_meta($duplicated_page_id, '_pix_meta_options', $original_content);
     }
 }
 ?>
