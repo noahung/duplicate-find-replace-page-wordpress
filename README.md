@@ -30,11 +30,7 @@ Once the plugin is activated, you can access it from the WordPress admin sidebar
 - Specify the number of duplicates to create.
 - Customizable and user-friendly interface.
 
-=== License ===
-
 ## License
-
-=== License ===
 
 This plugin is licensed under the GNU General Public License v2 or later (GPLv2+).
 
