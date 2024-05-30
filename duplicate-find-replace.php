@@ -113,6 +113,13 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
 
         // Update the meta options for the duplicated page
         update_post_meta($duplicated_page_id, '_pix_meta_options', $original_content);
+
+         // Copy Pixfort options
+        $pix_hide_top_padding = get_post_meta($page_id, 'pix-hide-top-padding', true);
+        $pix_hide_top_area = get_post_meta($page_id, 'pix-hide-top-area', true);
+
+        update_post_meta($new_page_id, 'pix-hide-top-padding', $pix_hide_top_padding);
+        update_post_meta($new_page_id, 'pix-hide-top-area', $pix_hide_top_area);
     }
 }
 ?>
