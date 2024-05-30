@@ -29,3 +29,13 @@ Once the plugin is activated, you can access it from the WordPress admin sidebar
 - Replace specified words or phrases in the duplicated pages.
 - Specify the number of duplicates to create.
 - Customizable and user-friendly interface.
+
+=== License ===
+
+This plugin is released under the [GNU General Public License v2 or later](https://www.gnu.org/licenses/gpl-2.0.html).
+
+Copyright (c) 2024 Noah Aung
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
