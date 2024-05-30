@@ -32,7 +32,9 @@ Once the plugin is activated, you can access it from the WordPress admin sidebar
 
 === License ===
 
-This plugin is released under the [GNU General Public License v2 or later](https://www.gnu.org/licenses/gpl-2.0.html).
+## License
+
+This project is licensed under the [GNU General Public License v2 or later (GPLv2+)](https://www.gnu.org/licenses/gpl-2.0.html). See the [LICENSE](LICENSE) file for details.
 
 Copyright (c) 2024 Noah Aung
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
