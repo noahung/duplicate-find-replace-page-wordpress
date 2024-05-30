@@ -6,7 +6,7 @@ Duplicate Page and Replace is a WordPress plugin that allows users to duplicate 
 
 To install Duplicate Page and Replace, follow these steps:
 
-1. Download the `duplicate-page-replace.zip` file from the [latest release](#) on GitHub.
+1. Download the `duplicate-page-replace.zip` file.
 2. Log in to your WordPress admin panel.
 3. Navigate to Plugins > Add New > Upload Plugin.
 4. Choose the `duplicate-page-replace.zip` file you downloaded and click "Install Now."
