@@ -1,9 +1,10 @@
 <?php
 /*
-Plugin Name: Duplicate Wizard
+Plugin Name: Duplicate SEO Wizard
 Description: Duplicates a page and replaces specified words.
 Version: 1.1
 Author: Noah
+License: GPLv2 or later
 */
 
 add_action('admin_menu', 'dpr_add_admin_menu');
@@ -81,6 +82,18 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
         return;
     }
 
+    // Retrieve Yoast SEO fields
+    $focus_keyphrase = get_post_meta($page_id, '_yoast_wpseo_focuskw', true);
+    $seo_title = get_post_meta($page_id, '_yoast_wpseo_title', true);
+    $meta_description = get_post_meta($page_id, '_yoast_wpseo_metadesc', true);
+
+    // Retrieve Pixfort options
+    $pix_hide_top_padding = get_post_meta($page_id, 'pix-hide-top-padding', true);
+    $pix_hide_top_area = get_post_meta($page_id, 'pix-hide-top-area', true);
+
+    // Retrieve page attributes
+    $parent_id = wp_get_post_parent_id($page_id);
+
     foreach ($replacements as $replace) {
         $new_page = array(
             'post_title' => str_replace($find, $replace, $page->post_title),
@@ -88,6 +101,7 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
             'post_status' => 'draft',
             'post_type' => $page->post_type,
             'post_author' => $page->post_author,
+            'post_parent' => $parent_id,
         );
 
         $new_page_id = wp_insert_post($new_page);
@@ -98,11 +112,7 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
             echo '<div class="error"><p>Failed to duplicate page with replacement: ' . $replace . '</p></div>';
         }
 
-        // Update Yoast SEO fields
-        $focus_keyphrase = get_post_meta($page_id, '_yoast_wpseo_focuskw', true);
-        $seo_title = get_post_meta($page_id, '_yoast_wpseo_title', true);
-        $meta_description = get_post_meta($page_id, '_yoast_wpseo_metadesc', true);
-
+        // Update Yoast SEO fields in duplicated page
         $new_focus_keyphrase = str_replace($find, $replace, $focus_keyphrase);
         $new_seo_title = str_replace($find, $replace, $seo_title);
         $new_meta_description = str_replace($find, $replace, $meta_description);
@@ -111,13 +121,7 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
         update_post_meta($new_page_id, '_yoast_wpseo_title', $new_seo_title);
         update_post_meta($new_page_id, '_yoast_wpseo_metadesc', $new_meta_description);
 
-        // Update the meta options for the duplicated page
-        update_post_meta($duplicated_page_id, '_pix_meta_options', $original_content);
-
-         // Copy Pixfort options
-        $pix_hide_top_padding = get_post_meta($page_id, 'pix-hide-top-padding', true);
-        $pix_hide_top_area = get_post_meta($page_id, 'pix-hide-top-area', true);
-
+        // Update Pixfort options in duplicated page
         update_post_meta($new_page_id, 'pix-hide-top-padding', $pix_hide_top_padding);
         update_post_meta($new_page_id, 'pix-hide-top-area', $pix_hide_top_area);
     }
