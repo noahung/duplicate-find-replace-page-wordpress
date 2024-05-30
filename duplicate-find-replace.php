@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Duplicate Page and Replace
+Plugin Name: Duplicate Wizard
 Description: Duplicates a page and replaces specified words.
 Version: 1.1
 Author: Noah
@@ -9,7 +9,8 @@ Author: Noah
 add_action('admin_menu', 'dpr_add_admin_menu');
 
 function dpr_add_admin_menu() {
-    add_menu_page('Duplicate Page and Replace', 'Duplicate SEO Wizard', 'manage_options', 'duplicate-page-replace', 'dpr_admin_page', 'dashicons-admin-page', 20);
+    $icon_url = plugin_dir_url(__FILE__) . 'adverto-logo.png';
+    add_menu_page('Duplicate SEO Wizard', 'Duplicate SEO Wizard', 'manage_options', 'duplicate-page-replace', 'dpr_admin_page', $icon_url, 20);
 }
 
 function dpr_admin_page() {
@@ -24,7 +25,7 @@ function dpr_admin_page() {
 
     ?>
     <div class="wrap">
-        <h1>Duplicate Page and Replace</h1>
+        <h1>Duplicate SEO Wizard</h1>
         <form method="post">
             <table class="form-table">
                 <tr valign="top">
