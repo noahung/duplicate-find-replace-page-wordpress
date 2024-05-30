@@ -97,6 +97,19 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
         } else {
             echo '<div class="error"><p>Failed to duplicate page with replacement: ' . $replace . '</p></div>';
         }
+
+        // Update Yoast SEO fields
+        $focus_keyphrase = get_post_meta($page_id, '_yoast_wpseo_focuskw', true);
+        $seo_title = get_post_meta($page_id, '_yoast_wpseo_title', true);
+        $meta_description = get_post_meta($page_id, '_yoast_wpseo_metadesc', true);
+
+        $new_focus_keyphrase = str_replace($find, $replace, $focus_keyphrase);
+        $new_seo_title = str_replace($find, $replace, $seo_title);
+        $new_meta_description = str_replace($find, $replace, $meta_description);
+
+        update_post_meta($new_page_id, '_yoast_wpseo_focuskw', $new_focus_keyphrase);
+        update_post_meta($new_page_id, '_yoast_wpseo_title', $new_seo_title);
+        update_post_meta($new_page_id, '_yoast_wpseo_metadesc', $new_meta_description);
     }
 }
 ?>
