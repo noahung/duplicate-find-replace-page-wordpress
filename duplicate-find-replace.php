@@ -15,26 +15,19 @@ function dpr_add_admin_menu() {
 }
 
 function dpr_admin_page() {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Verify the nonce before processing the form data
-        if (isset($_POST['dpr_nonce_field']) && wp_verify_nonce($_POST['dpr_nonce_field'], 'dpr_nonce_action')) {
-            $num_duplicates = intval($_POST['dpr_num_duplicates']);
-            $replacements = [];
-            for ($i = 1; $i <= $num_duplicates; $i++) {
-                $replacements[] = sanitize_text_field($_POST["dpr_replace_$i"]);
-            }
-            dpr_duplicate_pages(intval($_POST['dpr_page_id']), sanitize_text_field($_POST['dpr_find']), $replacements);
-        } else {
-            // Invalid nonce
-            wp_die('Security check failed');
+    if (isset($_POST['dpr_submit'])) {
+        $num_duplicates = intval($_POST['dpr_num_duplicates']);
+        $replacements = [];
+        for ($i = 1; $i <= $num_duplicates; $i++) {
+            $replacements[] = $_POST["dpr_replace_$i"];
         }
+        dpr_duplicate_pages($_POST['dpr_page_id'], $_POST['dpr_find'], $replacements);
     }
 
     ?>
     <div class="wrap">
         <h1>Duplicate SEO Wizard</h1>
         <form method="post">
-            <?php wp_nonce_field('dpr_nonce_action', 'dpr_nonce_field'); ?>
             <table class="form-table">
                 <tr valign="top">
                     <th scope="row">Page to Duplicate</th>
@@ -43,7 +36,7 @@ function dpr_admin_page() {
                             <?php
                             $pages = get_pages();
                             foreach ($pages as $page) {
-                                echo '<option value="' . esc_attr($page->ID) . '">' . esc_html($page->post_title) . '</option>';
+                                echo '<option value="' . $page->ID . '">' . $page->post_title . '</option>';
                             }
                             ?>
                         </select>
@@ -114,9 +107,9 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
         $new_page_id = wp_insert_post($new_page);
 
         if ($new_page_id) {
-            echo '<div class="updated"><p>Page duplicated successfully with replacement: ' . esc_html($replace) . '</p></div>';
+            echo '<div class="updated"><p>Page duplicated successfully with replacement: ' . $replace . '</p></div>';
         } else {
-            echo '<div class="error"><p>Failed to duplicate page with replacement: ' . esc_html($replace) . '</p></div>';
+            echo '<div class="error"><p>Failed to duplicate page with replacement: ' . $replace . '</p></div>';
         }
 
         // Update Yoast SEO fields in duplicated page
