@@ -91,6 +91,9 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
     $pix_hide_top_padding = get_post_meta($page_id, 'pix-hide-top-padding', true);
     $pix_hide_top_area = get_post_meta($page_id, 'pix-hide-top-area', true);
 
+    // Retrieve the featured image ID
+    $thumbnail_id = get_post_meta($page_id, '_thumbnail_id', true);
+
     // Retrieve page attributes
     $parent_id = wp_get_post_parent_id($page_id);
 
@@ -108,6 +111,11 @@ function dpr_duplicate_pages($page_id, $find, $replacements) {
 
         if ($new_page_id) {
             echo '<div class="updated"><p>Page duplicated successfully with replacement: ' . $replace . '</p></div>';
+
+            // Set the featured image for the duplicated page
+            if ($thumbnail_id) {
+                update_post_meta($new_page_id, '_thumbnail_id', $thumbnail_id);
+            }
         } else {
             echo '<div class="error"><p>Failed to duplicate page with replacement: ' . $replace . '</p></div>';
         }
